@@ -1,2 +1,1 @@
-# chefstrap
-Stripped-down bootstrap of Chef on either Ubuntu or SmartOS.
+`curl -sL https://raw.githubusercontent.com/yetu/chefstrap/master/bootstrap.sh | bash -s`
