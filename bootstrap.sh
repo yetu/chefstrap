@@ -1,14 +1,20 @@
 #!/bin/bash
 
-VERSION=$1
+while getopts v: opt
+do
+  case "$opt" in
+    v)  version="$OPTARG";;
+  esac
+done
 
-if [ $(grep -c Ubuntu /etc/product) -ge 1 ]; then
+if [ $(grep -c "Ubuntu" /etc/product) -ge 1 ]; then
   apt-get update
   apt-get install -y wget ca-certificates
-  curl -s -L https://chef.io/chef/install.sh | bash -s -- -v $VERSION
+  curl -s -L https://chef.io/chef/install.sh | bash -s -- -v $version
 fi
 
-if [ $(grep -c smartos /etc/product) -ge 1 ]; then
-  pkgin -y install ruby215-chef build-essential
-  gem install chef --version "$VERSION" --no-ri --no-rdoc
+if [ $(grep -c "Joyent Instance" /etc/product) -ge 1 ]; then
+  chef_package=$(pkgin search chef | grep "chef-[0-9]" | head -n1 | cut -d" " -f1)
+  pkgin -y install $chef_package build-essential
+  gem install chef --version "$version" --no-ri --no-rdoc
 fi
