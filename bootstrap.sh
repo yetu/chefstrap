@@ -3,6 +3,8 @@
 VERSION=$1
 
 if [ $(grep -c Ubuntu /etc/product) -ge 1 ]; then
+  apt-get update
+  apt-get install -y wget ca-certificates
   curl -s -L https://chef.io/chef/install.sh | bash -s -- -v $VERSION
 fi
 
