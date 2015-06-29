@@ -18,5 +18,8 @@ if [ $(grep -c "Joyent Instance" /etc/product) -ge 1 ]; then
   pkgin -y install $chef_package build-essential
   gem install chef --version "$version" --no-ri --no-rdoc
   mkdir -p /opt/chef/bin
+  mkdir -p /opt/chef/embedded/bin
   ln -fs /opt/local/bin/chef-client /opt/chef/bin/chef-client
+  ln -fs /opt/local/bin/ruby /opt/chef/embedded/bin/ruby
+  ln -fs /opt/local/bin/gem /opt/chef/embedded/bin/gem
 fi
