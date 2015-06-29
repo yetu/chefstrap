@@ -17,4 +17,6 @@ if [ $(grep -c "Joyent Instance" /etc/product) -ge 1 ]; then
   chef_package=$(pkgin search chef | grep "chef-[0-9]" | head -n1 | cut -d" " -f1)
   pkgin -y install $chef_package build-essential
   gem install chef --version "$version" --no-ri --no-rdoc
+  mkdir -p /opt/chef/bin
+  ln -fs /opt/chef/bin/chef-client /opt/local/bin/chef-client
 fi
