@@ -9,6 +9,11 @@ do
   esac
 done
 
+if [ -z "$version" ]; then
+  echo "This script requires that you pin the version of Chef you are installing!  Exiting..."
+  exit 1
+fi
+
 if [ $(grep -c Ubuntu /etc/product) -ge 1 ]; then
   apt-get update
   apt-get install -y wget ca-certificates
